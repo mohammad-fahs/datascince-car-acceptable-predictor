@@ -1,7 +1,5 @@
 # Data science project
 
-[PLAN ](https://www.notion.so/PLAN-152c09f65878803e98aafc27089a01ec?pvs=21)
-
 # Introduction to the project
 
 Cars are a ubiquitous part of daily life, and making informed decisions about their acceptability is crucial for consumers, manufacturers, and policymakers. The **Car Evaluation Database** provides a structured dataset to analyze and predict car acceptability based on specific attributes like price, safety, and capacity. Derived from a hierarchical decision model, the dataset has been widely used for machine learning and decision analysis research, making it an excellent resource for exploring predictive modeling, clustering, and data visualization techniques.
@@ -66,7 +64,8 @@ To ensure robust model evaluation, the following metrics will be used:
 
 No missing values were found in the dataset (`info()` revealed all columns had complete data for all 1728 rows). Therefore, no imputation was necessary. If missing values existed, techniques like imputation (using the mean, median, or mode for numerical data and most frequent for categorical data) or removal of rows/columns with too many missing values would be applied.
 
-![image.png](image.png)
+![image](https://github.com/user-attachments/assets/012763f1-e05d-446a-88ed-8c2903d70b8f)
+
 
 ### Adding new columns
 
@@ -184,11 +183,12 @@ print(f"Accuracy: {accuracy:.2f}")
 
 ### Model Accuracy
 
-![image.png](image%201.png)
+![image 1](https://github.com/user-attachments/assets/a25c06c4-3bda-4a97-8746-50014f549e2b)
+
 
 This model achieved an overall accuracy of **66%**, but its performance was inconsistent across classes. While it excelled in predicting class `2 (good)` with a high recall of **92%** and an F1-score of **81%**, it struggled significantly with the other classes, especially `1 (acc)` and `3 (v-good)`, where the recall was **0%**, indicating it failed to identify any instances of these classes. The imbalance in class performance suggests that logistic regression may not be well-suited for this multi-class problem without additional preprocessing or hyperparameter tuning.
 
-![image.png](image%202.png)
+![image 2](https://github.com/user-attachments/assets/eb1dff71-b8fb-402c-a46b-85bed80b901e)
 
 - **Class 0 (`unacc`)**: The logistic regression model misclassified most of the instances in this class, predicting **69** as class `2 (good)` and **12** as class `3 (v-good)`. This explains the poor precision (0.26) and recall (0.13) for this class, indicating a significant misclassification. It could be due to a lack of strong feature separation between `unacc` and other categories.
 - **Class 1 (`acc`)**: The model incorrectly classified **9** instances of class `1` as class `2 (good)`. This shows the model's struggle with identifying this class, as reflected by the **0% recall** for class `1` in the classification report.
@@ -216,7 +216,7 @@ print(top_features.head(10))
 
 ```
 
-![image.png](image%203.png)
+![image 3](https://github.com/user-attachments/assets/07b6b83e-ca36-4945-aea2-fbbdbc01baf2)
 
 - **Safety** is the most influential feature, with a significantly positive coefficient, suggesting that higher safety values strongly impact positive classification outcomes.
 - **Persons** and **Lug_boot** also positively affect predictions, indicating that the number of persons the car can hold and luggage boot size are important considerations.
@@ -302,11 +302,11 @@ print(f"Accuracy: {accuracy:.2f}")
 
 ### Model Accuracy
 
-![image.png](image%204.png)
+![image 4](https://github.com/user-attachments/assets/27176bb7-60a3-4541-89bd-20d105811104)
 
 The decision tree model performed exceptionally well, achieving an overall accuracy of **97%**. It delivered consistently high precision, recall, and F1-scores across all classes, particularly excelling in class `2 (good)` with perfect scores and performing well on the less frequent classes (`1` and `3`) with recall values of **91%** and **94%**, respectively. Its ability to capture patterns in all classes suggests it effectively handled the hierarchical or feature-based splits in the data.
 
-![image.png](image%205.png)
+![image 5](https://github.com/user-attachments/assets/1d4843c1-810f-4273-8170-e0e3c984a6bb)
 
 - **Class 0 (`unacc`)**: The decision tree model correctly classified **76** instances of class `0` as `unacc`, with only **6** misclassified to class `1` (`acc`). This high precision and recall for class `0` align with the **0.97 precision** and **0.92 recall** in the classification report.
 - **Class 1 (`acc`)**: The decision tree showed impressive performance here as well, with **10** correct predictions for class `1` and only **1** misclassification to class `0`. The model’s **91% recall** for class `1` reflects its ability to identify `acc` cases accurately.
@@ -330,7 +330,7 @@ print("Top Features based on Decision Tree Feature Importance:")
 print(top_features.head(10))
 ```
 
-![image.png](image%206.png)
+![image 6](https://github.com/user-attachments/assets/21d964a5-5737-4404-b626-29c985aabc73)
 
 - **Safety** and **Maint** are almost equally important, highlighting the decision tree's ability to split on these features frequently during classification.
 - **Persons** contributes significantly, likely due to its direct relevance to car acceptability.
@@ -420,11 +420,12 @@ print(f"Accuracy: {accuracy:.2f}")
 
 ### Model Accuracy
 
-![image.png](image%207.png)
+![image 7](https://github.com/user-attachments/assets/dc689664-0416-4df1-aa47-fe73314da3a3)
 
 Similar to the decision tree, the random forest model also achieved **97% accuracy** and demonstrated strong performance across all metrics. It showed slight improvement in handling class `1 (acc)` with a perfect recall of **100%** and a balanced F1-score of **79%**. The model's ensemble nature likely contributed to its robustness and ability to generalize better across all classes, including the less frequent ones.
 
-![image.png](image%208.png)
+![image 8](https://github.com/user-attachments/assets/af6b2d74-5c1e-48dc-b784-fd0807c442b0)
+
 
 - **Class 0 (`unacc`)**: The random forest model predicted **74** instances of class `0` correctly but misclassified **6** instances to class `1` and **3** to class `2`. These errors explain the slight decrease in recall for this class when compared to the decision tree. Still, the model maintained strong precision and recall in this class.
 - **Class 1 (`acc`)**: The model performed excellently here, with perfect recall (**100%**) and only **0** misclassifications. This aligns with its **1.00 recall** for class `1` in the classification report.
@@ -448,7 +449,7 @@ print("Top Features based on Random Forest Feature Importance:")
 print(top_features.head(10))
 ```
 
-![image.png](image%209.png)
+![image 9](https://github.com/user-attachments/assets/a4e139c9-1474-48ec-9edc-4a46c5bf2d89)
 
 - **Safety** remains the dominant feature, showing stability across algorithms.
 - **Persons** is the second most important feature, reinforcing its role in improving predictions.
@@ -535,11 +536,11 @@ print(f"Accuracy: {accuracy:.2f}")
 
 ### Model Accuracy
 
-![image.png](image%2010.png)
+![image 10](https://github.com/user-attachments/assets/48efdf02-f863-4c5b-bb7d-5f206c8fd6b5)
 
 The XGBoost classifier achieved the best overall accuracy of **98%**, with near-perfect performance in most classes. It maintained precision and recall values close to **100%** for the dominant class `2 (good)` and strong performance for classes `0 (unacc)` and `3 (v-good)`. However, while it perfectly identified class `1 (acc)` instances with a recall of **100%**, its F1-score of **81%** indicates room for slight improvement in balancing precision and recall for this minority class.
 
-![image.png](image%2011.png)
+![image 11](https://github.com/user-attachments/assets/00b199fb-ff8b-4be1-8e6a-0c13e4394c6c)
 
 - **Class 0 (`unacc`)**: The XGBoost model showed very good performance for class `0`, correctly classifying **79** instances and misclassifying only **4** to class `1`. This accounts for the high precision and recall (0.99 and 0.95, respectively) for class `0` in the classification report.
 - **Class 1 (`acc`)**: This class was handled well, with **11** correct predictions and no misclassifications to other classes. The model’s **100% recall** for class `1` indicates it identified all instances, but the **81% F1-score** suggests slight imbalances in precision.
@@ -563,7 +564,7 @@ print("Top Features based on XGBoost Feature Importance:")
 print(top_features.head(10))
 ```
 
-![image.png](image%2012.png)
+![image 12](https://github.com/user-attachments/assets/908dd72e-3c9d-4dca-a8cb-74736db88dd2)
 
 - **Safety** is even more dominant here than in other algorithms, underlining its critical role in accurate classification.
 - **Persons** remains the second most important, indicating consistency across models.
@@ -689,7 +690,7 @@ plt.title("Class Proportions", fontsize=16)
 plt.show()
 ```
 
-![image.png](image%2013.png)
+![image 13](https://github.com/user-attachments/assets/828dc288-4a6b-4870-aebb-7d6dd54d62c8)
 
 The pie chart visualizes the distribution of classes in the dataset:
 
@@ -714,7 +715,7 @@ The plot displays a set of bar charts, each representing the distribution of the
 4. **`good` Class**:
     - The `good` class shows a similar but less extreme trend, with a noticeable preference for `high` and `vhigh`, indicating that good cars also tend to be in the higher price range, but this class has a more balanced distribution compared to `vgood`.
 
-![image.png](image%2014.png)
+![image 14](https://github.com/user-attachments/assets/5b083768-7daf-414a-babb-83516615567d)
 
 ### Maintenance
 
@@ -734,7 +735,7 @@ The plot displays a set of bar charts, each representing the distribution of the
     - Similar to the `vgood` class, the `good` class has smaller counts overall, with a skew toward lower maintenance categories (`low` and `med`).
     - The trend suggests that cars classified as `good` typically require lower maintenance.
 
-![image.png](image%2015.png)
+![image 15](https://github.com/user-attachments/assets/475c3474-09fa-47d2-a68f-cf2406e16be9)
 
 ### Safety
 
@@ -753,11 +754,13 @@ The plot displays a set of bar charts, each representing the distribution of the
     - Similar to the `vgood` class, the `good` class predominantly appears in the `high` safety category, though with fewer examples.
     - There are also a few cars in the `med` safety category, but none in the `low` safety category.
 
-![image.png](image%2016.png)
+![image 16](https://github.com/user-attachments/assets/3ee59bb9-5f2b-44d5-8d47-0c5669007034)
+
 
 ## Heatmap Visualizations
 
-![image.png](image%2017.png)
+![image 17](https://github.com/user-attachments/assets/1705d6b5-e1ca-4eb0-b301-2e53d4bcef79)
+
 
 1. **`buying` vs Class**:
     - High buying costs (`vhigh` and `high`) are predominantly associated with the `unacc` class.
@@ -783,7 +786,8 @@ This visualization highlights that `safety` and `persons` are the most influenti
 
 which is indicated also in the XGBoost Algorithm feature importance analysis 
 
-![image.png](image%2018.png)
+![image 18](https://github.com/user-attachments/assets/f388f98b-c068-47a8-bfe2-603a03738abe)
+
 
 # Findings
 
