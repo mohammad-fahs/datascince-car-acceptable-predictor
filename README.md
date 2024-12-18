@@ -79,14 +79,11 @@ No new columns were added to the dataset because the six attributes were suffici
 
 - **Encoding Categorical Data**:
     - All categorical features were converted to numerical values using `LabelEncoder`. This ensures the data can be processed by logistic regression, which requires numerical input.
-- **Standardization**:
-    - Features were standardized using `StandardScaler` to ensure all attributes had a mean of 0 and a standard deviation of 1. This transformation was critical since logistic regression is sensitive to feature scaling, especially when handling features with different ranges (e.g., `doors` and `safety`).
 
 ### Remarkable data
 
 - **Imbalanced Class Distribution**:
     - The target variable (`class`) had a heavily imbalanced distribution, with 70% of samples belonging to the `unacc` class.
-    - SMOTE (Synthetic Minority Oversampling Technique) was applied to create a balanced dataset for training, ensuring fair representation across all classes.
 - **Classes with Few Samples**:
     - Classes like `good` and `v-good` had very few samples in the original dataset. This would lead to poor performance for these categories without oversampling.
 
