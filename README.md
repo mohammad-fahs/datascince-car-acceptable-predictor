@@ -568,95 +568,6 @@ print(top_features.head(10))
 - **Maint** overtakes **Buying**, showing that XGBoost identifies it as more relevant than random forests do.
 - **Lug_boot** and **Doors** are again the least important, consistent across all models.
 
-# Algorithms Comparison
-
-### **1. Logistic Regression**
-
-**Overview:**
-
-- A linear model used for classification tasks, predicting probabilities for classes.
-- Works best when the relationship between the features and the target variable is approximately linear.
-- Uses a sigmoid function to map predicted values to probabilities.
-
-**How it works for car acceptability:**
-
-- It assigns weights to the input features (buying, maint, doors, etc.) and calculates a linear combination. The sigmoid function maps this combination to one of the categories.
-- Multinomial logistic regression would be used for the four classes (unacc, acc, good, v-good).
-
-**Advantages:**
-
-- Easy to interpret (understands the impact of each feature).
-- Computationally efficient.
-- Performs well when the dataset is linearly separable.
-
-**Disadvantages:**
-
-- Struggles with non-linear relationships.
-- May underperform if features interact in complex ways.
-
-**Suitability:**
-
-- Less effective for this project due to the likely non-linear and hierarchical nature of the car features and their influence on acceptability.
-
-### **2. Decision Tree**
-
-**Overview:**
-
-- A non-linear model that splits data based on feature thresholds, creating a tree structure.
-- Works by recursively dividing the dataset into smaller subsets to maximize information gain or minimize impurity (e.g., Gini index or entropy).
-
-**How it works for car acceptability:**
-
-- The model identifies which features (e.g., safety, lug_boot) best split the data at each level, forming rules like:
-    - If safety = high and buying = low → Acceptable.
-    - Else → Unacceptable.
-
-**Advantages:**
-
-- Interpretable (easy to understand the decision path).
-- Captures non-linear relationships and feature interactions.
-- Can handle categorical features without preprocessing.
-
-**Disadvantages:**
-
-- Prone to overfitting (unless pruned).
-- Unstable (small changes in data can lead to different trees).
-
-**Suitability:**
-
-- Works well for your project as it can model the hierarchical nature of car acceptability decisions but might overfit without proper tuning.
-
-### **3. Random Forest**
-
-- **Type:** Ensemble of decision trees.
-- **Approach:** Combines multiple decision trees using bagging (bootstrap aggregation) and averages their predictions to reduce variance.
-- **Key Characteristics:**
-    - Robust against overfitting due to aggregation.
-    - Incorporates randomness in feature selection during splits, improving generalization.
-- **Advantages:**
-    - Handles high-dimensional, categorical data effectively.
-    - Provides feature importance scores, aiding interpretability.
-    - Reduces overfitting compared to individual decision trees.
-- **Disadvantages:**
-    - More computationally expensive than single decision trees.
-    - Less interpretable than a single decision tree.
-- **Performance in Car Acceptability Predictor:**
-    - Excels in identifying nuanced patterns in attributes.
-    - Likely delivers higher accuracy than logistic regression and decision tree due to its ability to generalize well on unseen data.
-
-### **4. XGBoost**
-
-- **Type**: Gradient Boosting Ensemble
-- **Strengths**:
-    - Highly efficient and handles complex datasets.
-    - Uses boosting to iteratively improve model performance by focusing on misclassified instances.
-    - Regularization helps prevent overfitting better than random forests.
-- **Weaknesses**:
-    - Complex to tune and interpret compared to other models.
-    - Requires more computational resources than logistic regression or decision trees.
-- **Performance in Car Acceptability Predictor**:
-    - Likely the best performer due to its ability to model non-linear patterns, robustness to noise, and its focus on improving weak predictions.
-
 # Algorithm Evaluation
 
 ### According to classification report
@@ -671,8 +582,6 @@ print(top_features.head(10))
 - **Decision Tree**: Demonstrated excellent overall performance, with high precision and recall across all classes. The confusion matrix confirms its effectiveness, especially for class `2 (good)`, where it had perfect predictions.
 - **Random Forest**: Performed similarly to the decision tree but with slightly better handling of the minority class `1 (acc)`. Its confusion matrix shows minimal misclassifications, especially for class `2 (good)`.
 - **XGBoost**: Achieved the best overall performance, with strong precision and recall, especially for class `2 (good)`. The confusion matrix shows that it handled minority classes well, despite minor misclassifications for class `1 (acc)` and `3 (v-good)`.
-
-# Analysis
 
 # Visualizations
 
@@ -794,23 +703,16 @@ which is indicated also in the XGBoost Algorithm feature importance analysis
     - **Logistic Regression** has the lowest accuracy (66%) due to its inability to model complex, non-linear relationships. It struggles with minority classes (`acc` and `v-good`), evident from its confusion matrix where most instances are misclassified.
     - **Decision Tree, Random Forest, and XGBoost** all achieve high accuracy (97-98%), showcasing their ability to capture intricate patterns in the data.
     - **XGBoost** slightly outperforms the other models with 98% accuracy, leveraging its advanced gradient boosting mechanism to optimize performance, especially for minority classes.
-2. **Class-Wise Observations:**
-    - **Class `2 (good)` dominates the dataset** and has consistently high recall across all models, showing that all algorithms focus heavily on correctly classifying the majority class.
-    - Minority classes (`acc` and `v-good`) are better handled by **tree-based models**. Logistic regression fails entirely for these classes, while XGBoost provides the best balance with its ability to prioritize minority classes through boosting.
-    - **Class `0 (unacc)`** has improved performance in tree-based models, thanks to features like **safety** and **maint**.
-3. **Feature Importance Insights:**
+2. **Feature Importance Insights:**
     - **Safety** is the most influential feature across all models, aligning with real-world expectations that safety is a critical factor in car acceptability.
     - **Persons (seating capacity)** is consistently the second most important feature, emphasizing its significance in predicting acceptability.
     - **Maint (maintenance cost)** and **Buying (purchase cost)** are more critical for tree-based models, which can better capture non-linear relationships between these features and car acceptability.
     - **Lug_boot (luggage capacity)** and **Doors (number of doors)** have consistently low importance, indicating they play a minor role in determining acceptability.
-4. **Confusion Matrices and Feature Utilization:**
+3. **Confusion Matrices and Feature Utilization:**
     - Logistic regression misclassifies many instances of minority classes (`acc` and `v-good`) as majority classes (`good`), showing its linear nature limits its ability to leverage feature interactions.
     - Tree-based models (especially Random Forest and XGBoost) better distribute focus across classes, correctly identifying minority class instances.
     - XGBoost’s slight edge over Random Forest is due to its ability to fine-tune splits and focus on difficult-to-predict instances, evident from the marginally better precision and recall for minority classes.
-5. **Imbalanced Data Effect:**
-    - The dataset's imbalance (majority in class `good`) likely influenced the weighted average metrics, favoring models like Random Forest and XGBoost that handle imbalanced data effectively.
-    - Logistic regression's poor performance on minority classes underscores its vulnerability to imbalanced datasets.
-
+    - 
 ### **Conclusions and Recommendations**
 
 1. **Best Model**:
